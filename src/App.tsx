@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
-import { fetchWeather } from "./api/weather"
-import weatherIcons from "./assets/weatherIcons"
 import { useDarkModeToggle } from "./hooks/useDarkModeToggle"
+import { fetchWeather } from "./api/weather"
+
+import { Moon, Sun } from "lucide-react"
+import weatherIcons from "./assets/weatherIcons"
 
 function App() {
   const [weather, setWeather] = useState<null | {
@@ -25,21 +27,21 @@ function App() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-800 p-6 sm:p-10">
       <div className="flex flex-col gap-10 items-center">
-        <div className="w-full flex flex-col items-center sm:flex-row gap-y-2 justify-between">
-          <h1 className="text-gray-900 dark:text-white text-4xl font-extrabold">
-            Atmosfeel 🌤️
+        <div className="w-full flex items-center gap-y-2 justify-between">
+          <h1 className="flex gap-2 text-gray-900 dark:text-white text-4xl font-extrabold">
+            <span className="sr-only sm:not-sr-only">Atmosfeel</span>
+            <span>🌤️</span>
           </h1>
-          <label className="inline-flex items-center cursor-pointer mb-6">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <Sun className="text-gray-900 dark:text-white" />
             <input
               type="checkbox"
               className="sr-only peer"
               checked={theme === "dark"}
               onChange={toggleTheme}
             />
-            <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
-            <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-              Dark mode
-            </span>
+            <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus-visible:ring-4 peer-focus-visible:ring-blue-300 dark:peer-focus-visible:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+            <Moon className="text-gray-900 dark:text-white" />
           </label>
         </div>
         <div className="w-full sm:max-w-[350px] bg-[#4F32FF] text-white flex flex-col items-center gap-3 p-8 rounded-3xl">
@@ -55,7 +57,7 @@ function App() {
               <div className="flex flex-col items-center">
                 <p className="text-5xl font-semibold">
                   {weather.temp.toFixed(0)}
-                  <span className="opacity-80">°C</span>
+                  <span className="text-4xl opacity-80">°C</span>
                 </p>
                 <p className="text-2xl">{weather.condition}</p>
               </div>
